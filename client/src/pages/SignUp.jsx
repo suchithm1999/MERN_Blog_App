@@ -46,9 +46,9 @@ const SignUp = () => {
         <div className="w-full flex-1">
           <Link to="/" className="font-bold text-4xl dark:text-white">
             <span className="px-2 py-1 bg-gradient-to-r from-red-500 via-orange-400 to-yellow-200 rounded-lg text-gray-700">
-              Suchith&apos;s
+              Sign
             </span>
-            Blog
+            Up
           </Link>
           <p className="mt-5 text-sm font-semibold">
             This is a demo project. You can sign up with your email and password
