@@ -42,7 +42,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="flex mx-auto max-w-4xl gap-10 mt-20 flex-col md:flex-row p-3">
+      <div className="flex mx-auto max-w-4xl gap-10 mt-20 flex-col md:flex-row p-3 min-h-screen">
         <div className="w-full flex-1">
           <Link to="/" className="font-bold text-4xl dark:text-white">
             <span className="px-2 py-1 bg-gradient-to-r from-red-500 via-orange-400 to-yellow-200 rounded-lg text-gray-700">
