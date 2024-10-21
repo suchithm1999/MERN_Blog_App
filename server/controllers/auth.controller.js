@@ -60,4 +60,54 @@ const signIn = async (req, res, next) => {
   }
 };
 
-module.exports = { signUp, signIn };
+const google = async (req, res, next) => {
+  const { email, name, photoUrl } = req.body;
+  try {
+    const validUser = await User.findOne({ email });
+    if (validUser) {
+      const token = jwt.sign(
+        { id: validUser._id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+        process.env.JWT_SECRET
+      );
+
+      const { password: pass, ...rest } = validUser._doc;
+
+      res
+        .status(200)
+        .cookie("access_token", token, { httpOnly: true })
+        .json(rest);
+    } else {
+      const username =
+        name.toLowerCase().split(" ").join("") +
+        Math.random().toString(10).slice(-4);
+      const password = Math.random().toString(36).slice(-8);
+      const hashedPassword = bcryptjs.hashSync(password, 10);
+
+      const newUser = new User({
+        username,
+        password: hashedPassword,
+        email,
+        photoUrl,
+      });
+      const validUser = await newUser.save();
+
+      if (validUser) {
+        const token = jwt.sign(
+          { id: validUser._id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+          process.env.JWT_SECRET
+        );
+
+        const { password: pass, ...rest } = validUser._doc;
+
+        res
+          .status(200)
+          .cookie("access_token", token, { httpOnly: true })
+          .json(rest);
+      }
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { signUp, signIn, google };
