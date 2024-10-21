@@ -7,6 +7,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -19,7 +20,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       if (!formData.email || !formData.password) {
-        dispatch(signInFailure("All fields are required!"));
+        return dispatch(signInFailure("All fields are required!"));
       }
       dispatch(signInStart());
       const response = await fetch("/api/auth/signin", {
@@ -101,6 +102,7 @@ const SignIn = () => {
                   "Sign In"
                 )}
               </Button>
+              <OAuth />
             </div>
             <div className="flex gap-2 text-sm font-semibold">
               <span>Don&apos;t have an account?</span>
