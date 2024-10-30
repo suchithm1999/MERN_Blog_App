@@ -6,7 +6,7 @@ import { HiChartPie, HiUser } from "react-icons/hi";
 const DashSidebar = ({ tab }) => {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <Sidebar className="w-full md:w-56 min-h-screen">
+    <Sidebar className="w-full md:w-56 md:min-h-screen">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           {currentUser && (
@@ -16,11 +16,13 @@ const DashSidebar = ({ tab }) => {
               </Sidebar.Item>
             </Link>
           )}
-          <Link to="/dashboard?tab=profile">
-            <Sidebar.Item icon={HiUser} active={tab === "profile"} as="div">
-              Profile
-            </Sidebar.Item>
-          </Link>
+          {currentUser && (
+            <Link to="/dashboard?tab=profile">
+              <Sidebar.Item icon={HiUser} active={tab === "profile"} as="div">
+                Profile
+              </Sidebar.Item>
+            </Link>
+          )}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

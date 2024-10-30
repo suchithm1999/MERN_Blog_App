@@ -19,10 +19,12 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      <div className="min-h-screen ">
+      <div className="md:min-h-screen ">
         <DashSidebar tab={tab} />
       </div>
-      <div>{currentUser && tab === "profile" && <DashProfile />}</div>
+      <div className="w-full">
+        {currentUser && tab === "profile" && <DashProfile />}
+      </div>
     </div>
   );
 };
